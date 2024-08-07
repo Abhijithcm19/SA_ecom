@@ -1,0 +1,28 @@
+.Product-Page-container{
+    background-color: #efeded;
+}
+.product-container .card{
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+    
+    
+}
+.product-container .card:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+.product-img{
+    border: 1px solid #f0f0f0;
+    padding: 15px;
+}
+.product-img img{
+    height: 220px;
+    width: 200px;
+    transition: 1s ease;
+}
+    
+.product-img img:hover{
+    transform: scale(.9);
+    transition: 1s ease-out;
+
+   
+}

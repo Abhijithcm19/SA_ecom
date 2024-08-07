@@ -1,0 +1,33 @@
+
+
+footer{
+    background-color: #232f3e;
+
+
+}
+
+footer h6{
+    font-size: 12px;
+    color: #c1c1c1;
+    font-weight: 300;
+    padding-bottom: 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: #5b6572;
+    width: fit-content;
+    
+}
+
+footer ul li{
+    font-size: 12px;
+    color: #d8d7d7;
+    font-weight: 400;
+    padding-bottom: 4px;
+}
+
+.copyright{
+    font-size: 11px;
+    color: #d8d7d7;
+    font-weight: 300;
+    
+}

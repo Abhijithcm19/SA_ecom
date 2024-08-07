@@ -1,0 +1,28 @@
+/* 
+.cart-container{
+
+}
+
+.cart-container{
+    padding: 20px;
+}
+.cart-container h1{
+    font-weight: 300;
+    text-align: center;
+}
+
+.top-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.top-section button{
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.top-texts span {
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0px 10px;
+} */

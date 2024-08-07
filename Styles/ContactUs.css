@@ -1,0 +1,44 @@
+.contact-container {
+    background-color: #e2f1f8;
+}
+
+.contact-bg {
+    height: 70vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(../assets/ContactUs/contactus2copy.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.contact-bg h2 {
+    letter-spacing: 3px;
+}
+
+.contact-text {
+    margin: 2px 100px 2px 100px;
+    color: #acabab;
+    line-height: 28px;
+}
+
+.contact-body {
+    max-width: 1440px;
+}
+
+.contact-info span {
+    display: block;
+}
+
+.contact-info div {
+    margin: 0.8rem 0;
+    padding: 1rem;
+}
+
+.contact-info div span:nth-child(2) {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #3059ff;
+}
+
+.contact-info .text {
+    padding-top: 0.4rem;
+}
