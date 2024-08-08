@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import "../Styles/ProductCart.css";
 import { CartContext } from "../context/CartContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ProductCart = () => {
   const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
@@ -19,37 +21,54 @@ const ProductCart = () => {
       <div className="row">
         <div className="col-lg-8">
           {cart.length > 0 ? (
-            <div className="card mb-3">
-              <div className="card-header">
+            <div className="card mb-4 shadow-sm">
+              <div className="card-header bg-primary text-white">
                 <h4>Cart Items</h4>
               </div>
               <div className="card-body">
                 {cart.map((item) => (
-                  <div className="row mb-3" key={item.id}>
-                    <div className="col-md-4">
+                  <div className="row mb-3 border-bottom pb-3" key={item.id}>
+                    <div className="col-md-4 d-flex justify-content-center">
                       <img
                         src={item.image}
-                        className="img-fluid"
+                        className="img-fluid rounded"
                         alt={item.title}
                       />
                     </div>
                     <div className="col-md-8">
                       <h5>{item.title}</h5>
                       <p className="mb-1">Price: ${item.price}</p>
-                      <input
-                        type="number"
-                        className="form-control w-25"
-                        value={item.quantity}
-                        min="1"
-                        onChange={(e) =>
-                          updateQuantity(item.id, e.target.value)
-                        }
-                      />
+                      <div className="d-flex align-items-center mb-2">
+                        <button
+                          className="btn btn-outline-secondary btn-sm me-2"
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          disabled={item.quantity <= 1}
+                        >
+                          <FontAwesomeIcon icon={faMinus} />
+                        </button>
+                        <input
+                          type="number"
+                          className="form-control w-25 text-center"
+                          value={item.quantity}
+                          min="1"
+                          readOnly
+                        />
+                        <button
+                          className="btn btn-outline-secondary btn-sm ms-2"
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                        >
+                          <FontAwesomeIcon icon={faPlus} />
+                        </button>
+                      </div>
                       <button
                         className="btn btn-danger btn-sm mt-2"
                         onClick={() => removeFromCart(item.id)}
                       >
-                        Remove
+                        <FontAwesomeIcon icon={faTrash} /> Remove
                       </button>
                     </div>
                   </div>
@@ -57,22 +76,28 @@ const ProductCart = () => {
               </div>
             </div>
           ) : (
-            <p>Your cart is empty.</p>
+            <p className="text-center">Your cart is empty.</p>
           )}
         </div>
         <div className="col-lg-4">
-          <div className="card">
-            <div className="card-header">
+          <div className="card shadow-sm">
+            <div className="card-header bg-success text-white">
               <h4>Summary</h4>
             </div>
             <div className="card-body">
-              <p>Subtotal: ${getTotalPrice()}</p>
-              <p>Tax: ${getTotalPrice() * 0.1}</p>
-              <h4 className="fw-medium">Total: ${getTotalPrice() * 1.1}</h4>
-              <button className="btn btn-primary btn-block mt-3 me-3 fw-medium">
+              <p className="d-flex justify-content-between">
+                <strong>Subtotal:</strong> ${getTotalPrice()}
+              </p>
+              <p className="d-flex justify-content-between">
+                <strong>Tax (10%):</strong> ${getTotalPrice() * 0.1}
+              </p>
+              <h4 className="fw-bold d-flex justify-content-between">
+                Total: ${getTotalPrice() * 1.1}
+              </h4>
+              <button className="btn btn-primary btn-block mt-3">
                 Checkout
               </button>
-              <button className="btn btn-warning btn-block mt-3 fw-medium border-secondary">
+              <button className="btn btn-warning btn-block mt-3 text-white border-0">
                 Confirm Order
               </button>
             </div>

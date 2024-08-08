@@ -8,15 +8,15 @@ import {
   faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { CartContext } from "../context/CartContext"; // Import CartContext
-import Swal from "sweetalert2"; // Import SweetAlert2
+import { CartContext } from "../context/CartContext";
+import Swal from "sweetalert2";
 
 const ProductsDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
-  const { addToCart } = useContext(CartContext); // Use CartContext
-  const navigate = useNavigate(); // Use navigate for programmatic navigation
+  const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -44,7 +44,7 @@ const ProductsDetails = () => {
       timer: 1500,
       showConfirmButton: false,
     }).then(() => {
-      navigate("/ProductCart"); // Navigate to ProductCart after showing the alert
+      navigate("/ProductCart");
     });
   };
 
