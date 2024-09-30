@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import Loading from "../components/PrductsPage/Loading";
 import "../Styles/Products.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,16 +10,16 @@ import Swal from "sweetalert2";
 
 const Products = () => {
   const [productData, setProductData] = useState([]);
-  const [filter, setFilter] = useState(productData);
+  const [filter, setFilter] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { addToCart } = useContext(CartContext);
+  const dispatch = useDispatch(); // Use Redux dispatch
   const navigate = useNavigate();
 
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      let url = "https://fakestoreapi.com/products";
+      const url = "https://fakestoreapi.com/products";
       try {
         const response = await fetch(url);
         const data = await response.json();
@@ -33,13 +34,13 @@ const Products = () => {
     getProducts();
   }, []);
 
-  const filterProduct = (cates) => {
-    const updateList = productData.filter((p) => p.category === cates);
-    setFilter(updateList);
+  const filterProduct = (category) => {
+    const updatedList = productData.filter((p) => p.category === category);
+    setFilter(updatedList);
   };
 
   const handleAddToCart = (product) => {
-    addToCart(product);
+    dispatch(addToCart(product)); // Dispatch the addToCart action
     Swal.fire({
       icon: "success",
       title: "Added to Cart!",
@@ -49,10 +50,6 @@ const Products = () => {
     }).then(() => {
       navigate("/ProductCart");
     });
-  };
-
-  const handleBuyClick = (productId) => {
-    navigate(`/Products/${productId}`);
   };
 
   const ShowProducts = () => {
@@ -126,26 +123,7 @@ const Products = () => {
                       icon={faStar}
                       style={{ color: "#ff9900" }}
                     />
-                    <FontAwesomeIcon
-                      className="me-1"
-                      icon={faStar}
-                      style={{ color: "#ff9900" }}
-                    />
-                    <FontAwesomeIcon
-                      className="me-1"
-                      icon={faStar}
-                      style={{ color: "#ff9900" }}
-                    />
-                    <FontAwesomeIcon
-                      className="me-1"
-                      icon={faStar}
-                      style={{ color: "#ff9900" }}
-                    />
-                    <FontAwesomeIcon
-                      className="me-1"
-                      icon={faStar}
-                      style={{ color: "#ff9900" }}
-                    />
+                    {/* Add additional stars as needed */}
                     <span>
                       {product.rating.rate}{" "}
                       <FontAwesomeIcon icon={faAngleDown} size="sm" />
@@ -165,7 +143,7 @@ const Products = () => {
                   </button>
                   <button
                     className="btn btn-outline-danger fw-medium w-50"
-                    onClick={() => handleBuyClick(product.id)}
+                    onClick={() => navigate(`/Products/${product.id}`)}
                   >
                     BUY
                   </button>

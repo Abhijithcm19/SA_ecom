@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+// src/components/Navbar.js
+import React from "react";
 import "../Styles/Navbar.css";
 import { assets } from "../assets/Assets";
 import { NavLink } from "react-router-dom";
@@ -8,10 +9,14 @@ import {
   faCartShopping,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { CartContext } from "../context/CartContext"; // Import CartContext
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { getCartCount } = useContext(CartContext); // Access the cart count
+  // Use useSelector to access cart items from Redux store
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // Calculate total count of items in the cart
+  const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
@@ -67,7 +72,7 @@ const Navbar = () => {
               />
               Cart
               <span className="cart-badge position-absolute top-0 start-25 text-warning">
-                {getCartCount()}
+                {cartCount}
               </span>
             </NavLink>
             <NavLink

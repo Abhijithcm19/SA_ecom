@@ -1,18 +1,21 @@
-import React, { useContext } from "react";
+// src/pages/ProductCart.js
+import React from "react";
 import "../Styles/ProductCart.css";
-import { CartContext } from "../context/CartContext";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeFromCart,
+  updateQuantity,
+  selectCartItems,
+} from "../store/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ProductCart = () => {
-  const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
+  const cart = useSelector(selectCartItems);
+  const dispatch = useDispatch();
 
   const getTotalPrice = () => {
     return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  };
-
-  const getTotalQuantity = () => {
-    return cart.reduce((acc, item) => acc + item.quantity, 0);
   };
 
   return (
@@ -42,7 +45,12 @@ const ProductCart = () => {
                         <button
                           className="btn btn-outline-secondary btn-sm me-2"
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
+                            dispatch(
+                              updateQuantity({
+                                id: item.id,
+                                quantity: item.quantity - 1,
+                              })
+                            )
                           }
                           disabled={item.quantity <= 1}
                         >
@@ -58,7 +66,12 @@ const ProductCart = () => {
                         <button
                           className="btn btn-outline-secondary btn-sm ms-2"
                           onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
+                            dispatch(
+                              updateQuantity({
+                                id: item.id,
+                                quantity: item.quantity + 1,
+                              })
+                            )
                           }
                         >
                           <FontAwesomeIcon icon={faPlus} />
@@ -66,7 +79,7 @@ const ProductCart = () => {
                       </div>
                       <button
                         className="btn btn-danger btn-sm mt-2"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => dispatch(removeFromCart(item.id))}
                       >
                         <FontAwesomeIcon icon={faTrash} /> Remove
                       </button>

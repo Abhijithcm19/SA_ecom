@@ -10,11 +10,12 @@ import ProductCart from "./pages/ProductCart";
 import Login from "./pages/Login";
 import FooterView from "./components/FooterView";
 import ProductsDetails from "./pages/ProductsDetails";
-import { CartProvider } from "./context/CartContext";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
   return (
-    <CartProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <div className="app">
           <Navbar />
@@ -30,7 +31,7 @@ function App() {
           <FooterView />
         </div>
       </BrowserRouter>
-    </CartProvider>
+    </Provider>
   );
 }
 
